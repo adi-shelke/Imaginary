@@ -8,7 +8,7 @@ const createPost = () => {
   const navigate = useNavigate();
   const [form, setform] = useState({
     name: "",
-    prompt: "a stained glass window depicting a hamburger and french fries",
+    prompt: "",
     photo: ""
   })
 
@@ -71,8 +71,8 @@ const createPost = () => {
           <FormField 
             LabelName="Prompt"
             type="text"
-            name="Prompt"
-            placeholder="a stained glass window depicting a hamburger and french fries"
+            name="prompt"
+            placeholder="Enter a prompt here or click surprise me"
             value = {form.prompt}
             handleChange={handleChange}
             isSurpriseMe
@@ -110,7 +110,7 @@ const createPost = () => {
             </button>
         </div>
         <div className='mt-10'>
-            <p className='mt-2 text-[#666e75] text-[14px]'>once you have created the image you want, you can share it with others in the community</p>
+            <p className='mt-2 text-[#666e75] text-[14px]'>Once you have created the image you want, you can share it with others in the community</p>
             <button
             type='submit'
             className='mt-3 text-white bg-[#6469ff] fomt-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center'
