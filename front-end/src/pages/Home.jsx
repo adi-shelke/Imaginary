@@ -14,6 +14,8 @@ const Home = () => {
   const [Loading, setLoading] = useState(false)
   const [AllPosts, setAllPosts] = useState(null)
   const [SearchText, setSearchText] = useState("")
+  const [searchedResults, setsearchedResults] = useState(null)
+  const [searchTimeout, setsearchTimeout] = useState(null)
 
   //use effect hook that will run only once at the start once the component is load
   useEffect(() => {
@@ -39,6 +41,18 @@ const Home = () => {
     }
     fetchPosts()
   }, []);
+
+  const handleSearchChange = (e) =>{
+    clearTimeout(searchTimeout)
+    setSearchText(e.target.value)
+    setsearchTimeout(
+      setTimeout(()=>{
+        const searchResults =  AllPosts.filter((item)=>item.name.toLowerCase().includes(SearchText.toLowerCase())|| item.prompt.toLowerCase().includes(SearchText.toLowerCase()))
+  
+        setsearchedResults(searchResults)
+      },500)
+    )
+  }
   
 
   return (
@@ -49,7 +63,14 @@ const Home = () => {
       </div>
 
       <div className='mt-16 '>
-        <FormField />
+        <FormField 
+        LabelName="Search posts"
+        type="text"
+        name="text"
+        placeholder="Search posts"
+        value={SearchText}
+        handleChange={handleSearchChange}
+        />
       </div>
       <div className='mt-10'>
         {Loading ? (
@@ -67,7 +88,7 @@ const Home = () => {
             <div className='grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3'>
               {SearchText ?(
                 <RenderCards
-                data={AllPosts}
+                data={searchedResults}
                 title="No search results found"
                 />
               ) : (
