@@ -16,7 +16,12 @@ import Post from "../models/posts.js"
 
  // route to get all the posts
  router.route("/").get(async (req,res) =>{
-    
+    try {
+        const posts = await Post.find({})
+        res.status(200).json({succcess:true,data:posts})
+    } catch (error) {
+        res.status(500).json({succcess:false,message:error})
+    }
  })
 
  //route to create a post
