@@ -16,6 +16,11 @@ import Post from "../models/posts.js"
 
  // route to get all the posts
  router.route("/").get(async (req,res) =>{
+    
+ })
+
+ //route to create a post
+ router.route("/").post(async (req,res) =>{
     try {
         const {name,prompt,photo}=req.body
     const photoUrl = await cloudinary.uploader.upload(photo)
@@ -29,10 +34,5 @@ import Post from "../models/posts.js"
     } catch (error) {
         res.status(500).json({success:false,message:error})
     }
- })
-
- //route to create a post
- router.route("/").post(async (req,res) =>{
-    
  })
  export default router;
